@@ -29,3 +29,10 @@ create table tbl_user_video(
     foreign key (iIdVideo) references tbl_video(iId),
     primary key (iId)
 );
+
+CREATE Table tbl_speakers(
+    iId int not null AUTO_INCREMENT,
+    sFullName nvarchar(50) not null,
+    sLinkedInUrl varchar(100),
+    PRIMARY KEY (iId)
+);
