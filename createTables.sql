@@ -1,7 +1,7 @@
-create database techobddev;
+--create database techobddev;
 use techobddev;
 
-DROP TABLE IF EXISTS techobddev.tbl_user,techobddev.tbl_video,techobddev.tbl_user_video;
+DROP TABLE IF EXISTS tbl_user,tbl_video,tbl_user_video,tbl_video;
 
 CREATE TABLE tbl_user (
     iId INT NOT NULL AUTO_INCREMENT,
@@ -30,9 +30,10 @@ create table tbl_user_video(
     primary key (iId)
 );
 
-CREATE Table tbl_speakers(
+CREATE Table tbl_speaker(
     iId int not null AUTO_INCREMENT,
     sFullName nvarchar(50) not null,
     sLinkedInUrl varchar(100),
+    sImageUrl varchar(100),
     PRIMARY KEY (iId)
 );
