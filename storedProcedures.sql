@@ -1,4 +1,4 @@
-drop procedure if exists spValidateUserCredentials;
+drop procedure spValidateUserCredentials;
 delimiter //
 create procedure spValidateUserCredentials
 (
@@ -12,7 +12,7 @@ begin
 end //
 delimiter ;
 
-drop procedure if exists spCreateUser;
+drop procedure spCreateUser;
 
 delimiter //
 
@@ -23,58 +23,39 @@ create procedure spCreateUser
     in userPassword nvarchar(30),
     in isEnterpriseUser boolean
 )
-begin  
-    if  NOT EXISTS (SELECT 1 FROM tbl_user WHERE sUserEmail = userEmail) THEN
-        insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) 
-        values (userEmail,isEnterpriseUser,userPassword,userFullName);        
-    End if ;    
+begin
+    declare iCreateUser int default 0;
+    
+    -- Se valida si el usuario ya existe o no
+    select	count(*) into iCreateUser
+    from 	tbl_user
+    where	sUserEmail = userEmail;
+    
+    select iCreateUser;
+    
+    /*
+    
+    set result = false;
+    
+    if iCreateUser = 1 then
+		insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) 
+		values (userEmail,isEnterpriseUser,userPassword,userFullName);
+		commit;
+        set result = true;
+    end if;
+    
+    */
 
 end //
 delimiter ;
 
-delimiter //
 
-create procedure spUpdateUserInfo
-(
-    in userId int,
-    in userFullName nvarchar(100), 
-    in userPassword nvarchar(30),
-    in isEnterpriseUser boolean
-)
-begin
 
-    declare iUserFullName default '';
-    declare iUserPassword default '';
-    declare iIsEnterpriseUser default false;
+set @userName = 'jose@gmail';
+set @pass = '123';
+set @isEnterp = false;
+set @fullName = 'Pepe lucho';
+set @re = false;
+-- call spValidateUserCredentials(@userName,@pass);
+call spCreateUser(@userName,@fullName,@pass,@isEnterp);
 
-    --Se obtienen los valores actuales
-    SELECT  sFullName into iUserFullName,
-            sPassword into iUserPassword,
-            bIsEnterprise into iIsEnterpriseUser
-    from    tbl_user
-    where   iId = userId;
-
-    --Se guardan las variables de manera temporal
-    if not iUserFullName = userFullName then
-        set iUserFullName = userFullName
-    end if;
-
-    if not iUserPassword = userPassword
-        set iUserPassword = userPassword
-    end if;
-
-    if not iIsEnterpriseUser = isEnterpriseUser then
-        set iIsEnterpriseUser = isEnterpriseUser
-    end if;
-
-    --Se actualizan los valores de la tabla
-    update from tbl_user
-    set
-        sUserEmail = iUserFullName,
-        sPassword = iUserPassword,
-        bIsEnterprise = iIsEnterpriseUser
-    where iId = userId;
-
-end //
-
-DELIMITER ;
