@@ -6,7 +6,7 @@ create procedure spValidateUserCredentials
 	in userPassword nvarchar(50)
 )
 begin    
-	select	count(*) as result
+	select	iId as userId
     from 	tbl_user
     where	sPassword = userPassword and sUserEmail = userEmail;
 end //
@@ -24,13 +24,53 @@ create procedure spCreateUser
     in isEnterpriseUser boolean
 )
 begin  
+
+	declare contador int;
+    declare rowCount int;
+    declare videoId int;
+    declare userId int;
+    
     if  NOT EXISTS (SELECT 1 FROM tbl_user WHERE sUserEmail = userEmail) THEN
         insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) 
-        values (userEmail,isEnterpriseUser,userPassword,userFullName);        
-    End if ;    
+        values (userEmail,isEnterpriseUser,userPassword,userFullName);     
+        commit;
+    End if ;  
+    
+    -- Se obtiene el id del usuario creado
+    
+    select	iId 
+    into 	userId
+    from	tbl_user
+	where	sUserEmail = userEmail;
+    
+    -- Se agregan los registros para los videos del usuario
+    set contador = 1;
+    set rowCount = 0;
+    
+    select	count(*) as nro
+    into	rowCount
+    from	tbl_video;
+    
+    while contador <= rowCount do
+		select
+				row_number() over (order by iId) row_num,
+				iId
+		into	videoId	
+		from	tbl_video
+        where	row_num = contador;
+        
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,videoId);
+        commit;
+        
+        set contador = contador + 1;
+    
+    end while;
+    
 
 end //
 delimiter ;
+
+drop procedure if exists spUpdateUserInfo;
 
 delimiter //
 
@@ -81,3 +121,65 @@ begin
 end //
 
 DELIMITER ;
+
+drop procedure if exists spGetUserInfo;
+
+delimiter //
+
+create procedure spGetUserInfo
+(
+	in userId int
+)
+begin
+	select	
+			iId,
+			sUserEmail,
+            bIsEnterprise,
+            SFullname
+    from 	tbl_user
+    where	iId = userId;
+end //
+
+delimiter ;
+
+drop procedure if exists spListUserVideos;
+
+delimiter //
+
+create procedure spListUserVideos 
+(
+	in userId int
+)
+begin
+	select	uv.iId as id,
+			uv.iIdUser as userId,
+            uv.iIdVideo as videoId,
+            uv.sIsWatched as videoWatched,
+            v.sName as videoName,
+            v.sAddress as videoAddress,
+            v.sVideoType as videoType
+    from 	tbl_user_video uv inner join tbl_video v on uv.iId = v.iId
+    where 	uv.iId = userId;
+end //
+
+delimiter ;
+
+drop procedure if exists spUpdateUserVideo;
+
+delimiter //
+
+create procedure spUpdateUserVideo
+(
+	in userId int,
+    in videoId int
+)
+begin
+	update 	tbl_user_video
+    set 	sIsWatched = true
+    where 	iIdUser = userId and iIdVideo = videoId;
+    commit;
+end //
+
+delimiter ;
+
+-- Insertar video en viendo
