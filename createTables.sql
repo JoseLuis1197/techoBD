@@ -1,7 +1,7 @@
---create database techobddev;
+-- create database techobddev;
 use techobddev;
 
-DROP TABLE IF EXISTS tbl_user,tbl_video,tbl_user_video,tbl_video;
+DROP TABLE IF EXISTS tbl_user,tbl_video,tbl_user_video,tbl_speaker;
 
 CREATE TABLE tbl_user (
     iId INT NOT NULL AUTO_INCREMENT,
@@ -24,7 +24,7 @@ create table tbl_user_video(
 	iId int not null auto_increment,
     iIdUser int,
     iIdVideo int,
-    sStatus nvarchar(1),
+    sIsWatched boolean default false,
     foreign key (iIdUser) references tbl_user(iId),
     foreign key (iIdVideo) references tbl_video(iId),
     primary key (iId)
