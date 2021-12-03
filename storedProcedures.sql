@@ -2,7 +2,7 @@ drop procedure if exists spValidateUserCredentials;
 delimiter //
 create procedure spValidateUserCredentials
 (
-	in userEmail nvarchar(50), 
+	in userEmail nvarchar(50),
 	in userPassword nvarchar(50)
 )
 begin    
@@ -42,33 +42,36 @@ create procedure spUpdateUserInfo
     in isEnterpriseUser boolean
 )
 begin
+    declare iUserFullName nvarchar(100) default '';
+    declare iUserPassword nvarchar(50) default '';
+    declare iIsEnterpriseUser boolean default false;
 
-    declare iUserFullName default '';
-    declare iUserPassword default '';
-    declare iIsEnterpriseUser default false;
-
-    --Se obtienen los valores actuales
-    SELECT  sFullName into iUserFullName,
-            sPassword into iUserPassword,
-            bIsEnterprise into iIsEnterpriseUser
+    -- Se obtienen los valores actuales
+    select
+			sFullName,
+            sPassword,
+            bIsEnterprise
+	into  	iUserFullName,
+			iUserPassword,
+            iIsEnterpriseUser
     from    tbl_user
     where   iId = userId;
 
-    --Se guardan las variables de manera temporal
-    if not iUserFullName = userFullName then
-        set iUserFullName = userFullName
+    -- Se guardan las variables de manera temporal
+    if not iUserFullName <> userFullName then
+        set iUserFullName = userFullName;
     end if;
 
-    if not iUserPassword = userPassword
-        set iUserPassword = userPassword
+    if not iUserPassword = userPassword then
+        set iUserPassword = userPassword;
     end if;
 
     if not iIsEnterpriseUser = isEnterpriseUser then
-        set iIsEnterpriseUser = isEnterpriseUser
+        set iIsEnterpriseUser = isEnterpriseUser;
     end if;
 
-    --Se actualizan los valores de la tabla
-    update from tbl_user
+    --  Se actualizan los valores de la tabla
+    update tbl_user
     set
         sUserEmail = iUserFullName,
         sPassword = iUserPassword,
