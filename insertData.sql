@@ -1,5 +1,5 @@
---Insertar datos a la tabla de usuarios (test)
-
+-- Insertar datos a la tabla de usuarios (test)
+delete from tbl_user_video;
 delete from tbl_user;
 
 insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) values ('jose@gmail',false,'123','jose');
@@ -11,7 +11,7 @@ insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) values ('mar
 
 commit;
 
---Insertar datos a la tabla de speakers
+-- Insertar datos a la tabla de speakers
 delete from tbl_speaker;
 
 insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Jorge Apaza','','');
@@ -19,7 +19,7 @@ insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Crispin','',
 insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Vales','','');
 insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Cano','','');
 
---Insert datos de videos
+-- Insert datos de videos
 -- V: voluntario
 -- O: Organización
 
@@ -27,7 +27,5 @@ delete from tbl_video;
 
 insert into tbl_video (sName,sAddress,sVideoType) values ('modulo01','','V');
 insert into tbl_video (sName,sAddress,sVideoType) values ('modulo01','','O');
-
 insert into tbl_video (sName,sAddress,sVideoType) values ('modulo01','','O');
-
 insert into tbl_video (sName,sAddress,sVideoType) values ('modulo01','','O');
