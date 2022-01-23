@@ -6,7 +6,9 @@ DROP TABLE IF EXISTS tbl_user,tbl_video,tbl_user_video,tbl_speaker;
 CREATE TABLE tbl_user (
     iId INT NOT NULL AUTO_INCREMENT,
     sUserEmail nvarchar(100) unique,
+    sDNI nvarchar(10) unique,
     bIsEnterprise BOOLEAN NOT NULL,
+    bIsDataTreatment BOOLEAN NOT NULL,
     sPassword NVARCHAR(30),
     sFullName NVARCHAR(100),
     PRIMARY KEY (iId)

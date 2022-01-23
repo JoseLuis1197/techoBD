@@ -21,23 +21,23 @@ create procedure spCreateUser
 	in userEmail nvarchar(100), 
     in userFullName nvarchar(100), 
     in userPassword nvarchar(30),
-    in isEnterpriseUser boolean
+    in userIsDataTreatment boolean,
+    in isEnterpriseUser boolean,
+    in userDNI nvarchar(10)
 )
-begin  
-
+begin
 	declare contador int;
     declare rowCount int;
     declare videoId int;
     declare userId int;
     
     if  NOT EXISTS (SELECT 1 FROM tbl_user WHERE sUserEmail = userEmail) THEN
-        insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) 
-        values (userEmail,isEnterpriseUser,userPassword,userFullName);     
+        insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName,bisDataTreatment,sDNI) 
+        values (userEmail,isEnterpriseUser,userPassword,userFullName,userIsDataTreatment,userDNI);     
         commit;
     End if ;  
     
-    -- Se obtiene el id del usuario creado
-    
+    -- Se obtiene el id del usuario creado    
     select	iId 
     into 	userId
     from	tbl_user
@@ -64,8 +64,7 @@ begin
         
         set contador = contador + 1;
     
-    end while;
-    
+    end while;   
 
 end //
 delimiter ;
@@ -134,7 +133,9 @@ begin
 			iId,
 			sUserEmail,
             bIsEnterprise,
-            SFullname
+            sFullname,
+            sDNI,
+            bIsDataTreatment
     from 	tbl_user
     where	iId = userId;
 end //
@@ -180,5 +181,3 @@ begin
 end //
 
 delimiter ;
-
--- Insertar video en viendo
