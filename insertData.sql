@@ -25,7 +25,12 @@ insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Cano','','')
 
 delete from tbl_video;
 
-insert into tbl_video (sName,sAddress,sVideoType) values ('modulo01','','V');
-insert into tbl_video (sName,sAddress,sVideoType) values ('modulo01','','O');
-insert into tbl_video (sName,sAddress,sVideoType) values ('modulo01','','O');
-insert into tbl_video (sName,sAddress,sVideoType) values ('modulo01','','O');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 01 - Parte I','','V');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 01 - Parte II','','V');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 02 - Parte I','','V');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 02 - Parte II','','V');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 03 - Parte I','','V');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 03 - Parte II','','V');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Programa de organizaciones 1','','O');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Programa de organizaciones 2','','O');
+
