@@ -19,18 +19,21 @@ insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Crispin','',
 insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Vales','','');
 insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Cano','','');
 
+commit;
+
 -- Insert datos de videos
 -- V: voluntario
 -- O: Organización
 
 delete from tbl_video;
 
-insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 01 - Parte I','','V');
-insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 01 - Parte II','','V');
-insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 02 - Parte I','','V');
-insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 02 - Parte II','','V');
-insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 03 - Parte I','','V');
-insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 03 - Parte II','','V');
-insert into tbl_video (sName,sAddress,sVideoType) values ('Programa de organizaciones 1','','O');
-insert into tbl_video (sName,sAddress,sVideoType) values ('Programa de organizaciones 2','','O');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 01','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+M%C3%93DULO+1.mp4','V');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 02 - Parte I','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+M%C3%93DULO+2+-+Parte+1.mp4','V');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 02 - Parte II','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+M%C3%93DULO+2+-+Parte+2.mp4','V');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 03 - Parte I','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+M%C3%93DULO+3+-+Parte+1.mp4','V');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Módulo 03 - Parte II','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+M%C3%93DULO+3+-+Parte+2.mp4','V');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Programa de organizaciones 1','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+PRESNTAC+1.mp4','O');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Programa de organizaciones 2','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+PRESNTAC+2.mp4','O');
+insert into tbl_video (sName,sAddress,sVideoType) values ('Programa de organizaciones 3','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+PRESNTAC+3.mp4','O');
 
+commit;
