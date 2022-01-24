@@ -6,7 +6,12 @@ create procedure spValidateUserCredentials
 	in userPassword nvarchar(50)
 )
 begin    
-	select	iId as userId
+	select	iId as userId,
+            sUserEmail as userEmail,
+            sDNI as userDNI,
+            bIsEnterprise as userEnterprise,
+            bIsDataTreatment as userIsDataTreatment,
+            sFullName as userFullName
     from 	tbl_user
     where	sPassword = userPassword and sUserEmail = userEmail;
 end //
