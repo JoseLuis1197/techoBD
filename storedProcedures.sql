@@ -48,29 +48,24 @@ begin
     from	tbl_user
 	where	sUserEmail = userEmail;
     
-    -- Se agregan los registros para los videos del usuario
-    set contador = 1;
-    set rowCount = 0;
-    
-    select	count(*) as nro
-    into	rowCount
-    from	tbl_video;
-    
-    while contador <= rowCount do
-		select
-				row_number() over (order by iId) row_num,
-				iId
-		into	videoId	
-		from	tbl_video
-        where	row_num = contador;
-        
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,videoId);
+    if userIsDataTreatment = true then
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,1);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,2);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,3);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,4);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,5);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,6);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,7);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,8);
         commit;
-        
-        set contador = contador + 1;
-    
-    end while;   
-
+    else
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,1);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,2);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,3);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,4);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,5);
+        commit;
+    end if;
 end //
 delimiter ;
 
