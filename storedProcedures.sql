@@ -49,7 +49,7 @@ begin
     from	tbl_user
 	where	sUserEmail = userEmail;
     
-    if userIsDataTreatment = true then
+    if isEnterpriseUser = true then
         insert into tbl_user_video (iIdUser,iIdVideo) values (userId,1);
         insert into tbl_user_video (iIdUser,iIdVideo) values (userId,2);
         insert into tbl_user_video (iIdUser,iIdVideo) values (userId,3);
