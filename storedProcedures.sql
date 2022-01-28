@@ -160,7 +160,7 @@ begin
             v.sAddress as videoAddress,
             v.sVideoType as videoType
     from 	tbl_user_video uv inner join tbl_video v on uv.iId = v.iId
-    where 	uv.iId = userId;
+    where 	uv.iIdUser = userId;
 end //
 
 delimiter ;
