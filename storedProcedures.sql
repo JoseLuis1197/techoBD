@@ -1,4 +1,5 @@
-drop procedure spValidateUserCredentials;
+drop procedure if exists spValidateUserCredentials;
+
 delimiter //
 create procedure spValidateUserCredentials
 (
@@ -17,7 +18,7 @@ begin
 end //
 delimiter ;
 
-drop procedure spCreateUser;
+drop procedure if exists spCreateUser;
 
 delimiter //
 
