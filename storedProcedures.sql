@@ -158,7 +158,11 @@ begin
             uv.sIsWatched as videoWatched,
             v.sName as videoName,
             v.sAddress as videoAddress,
-            v.sVideoType as videoType
+            v.sVideoType as videoType,
+            v.sDescription as videoDescription,
+            v.sConditions as videoConditions,
+            v.sSpeaker as videoSpeaker,
+            v.sTiming as videoTiming
     from 	tbl_user_video uv inner join tbl_video v on uv.iId = v.iId
     where 	uv.iIdUser = userId;
 end //
