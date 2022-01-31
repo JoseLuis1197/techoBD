@@ -32,8 +32,6 @@ create procedure spCreateUser
     in userDNI nvarchar(10)
 )
 begin
-	declare contador int;
-    declare rowCount int;
     declare videoId int;
     declare userId int;
     
