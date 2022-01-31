@@ -17,6 +17,10 @@ CREATE TABLE tbl_user (
 create table tbl_video(
 	iId int not null auto_increment,
     sName nvarchar(50) not null,
+    sDescription nvarchar(100),
+    sConditions nvarchar(2000),
+    sSpeaker nvarchar(100),
+    sTiming nvarchar(20),
     sAddress nvarchar(100) not null,
     sVideoType nvarchar(1) not null,
     primary key (iId)
