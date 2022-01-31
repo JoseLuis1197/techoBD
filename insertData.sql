@@ -1,25 +1,7 @@
 -- Insertar datos a la tabla de usuarios (test)
 delete from tbl_user_video;
 delete from tbl_user;
-
-insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) values ('jose@gmail',false,'123','jose');
-insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) values ('aleja@gmail',false,'123','alejand');
-insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) values ('mart@gmail',false,'123','Martin');
-insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) values ('alessia_proa@gmail',false,'123','Alessia');
-insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) values ('sara@hotmail',false,'123','Sara Potter');
-insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName) values ('maraiaychus@gmail',false,'123','Maria y Chus');
-
-commit;
-
--- Insertar datos a la tabla de speakers
 delete from tbl_speaker;
-
-insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Jorge Apaza','','');
-insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Crispin','','');
-insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Vales','','');
-insert into tbl_speaker (sFullName,sLinkedInUrl,sImageUrl) values ('Cano','','');
-
-commit;
 
 -- Insert datos de videos
 -- V: voluntario
@@ -34,6 +16,6 @@ insert into tbl_video (sName,sAddress,sVideoType,sDescription,sSpeaker,sTiming,s
 insert into tbl_video (sName,sAddress,sVideoType,sDescription,sSpeaker,sTiming,sConditions) values ('Módulo 03 - Parte II','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+M%C3%93DULO+3+-+Parte+2.mp4','V','TEMA 2: Contención Emocional','Nurys Joselyn Morin','45 min','<ul><li>Taller de Contención Emocional (Casos de vulnerabilidad)</li></ul>');
 insert into tbl_video (sName,sAddress,sVideoType,sDescription,sSpeaker,sTiming,sConditions) values ('Presentación 1','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+PRESNTAC+1.mp4','O','El voluntariado en el Perú.','Ivonne Harvey','50 min','<ul><li>¿Dónde estamos y quiénes somos? Soy voluntario porque …</li><li>¿Qué representa el voluntariado?</li><li>El voluntariado en el Perú.</li><li>Desafíos para el voluntariado.</li></ul>');
 insert into tbl_video (sName,sAddress,sVideoType,sDescription,sSpeaker,sTiming,sConditions) values ('Presentación 2','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+PRESNTAC+2.mp4','O','Ley de Voluntariado y su sistema.','Teri de Sario Acasuzo','50 min','<ul><li>Importancia del voluntariado.</li><li>El marco normativo.</li><li>Definición de voluntariado: derechos, deberes y beneficios.</li><li>Organizaciones de voluntariado: Obligaciones.</li><li>Sistema Nacional de voluntariado.</li><li>Registro de voluntariado.</li><li>Plataforma del Sistema Nacional de Voluntariado.</li></ul>');
-insert into tbl_video (sName,sAddress,sVideoType,sDescription,sSpeaker,sTiming,sConditions) values ('Programa de organizaciones 3','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+PRESNTAC+3.mp4','O','Modelo de Gestión de Voluntariado - TECHO.','Carolina Martinez','33 min','<ul><li>Historia: 15 años en el Perú.</li><li>Definición: voluntario y voluntaria.</li><li>Planificación.</li><li>Diseñar. Ciclo de voluntariado.</li><li>Modelo de gestión de voluntariado.</li><li>Aprendizajes.</li></ul>');
+insert into tbl_video (sName,sAddress,sVideoType,sDescription,sSpeaker,sTiming,sConditions) values ('Presentación 3','https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+PRESNTAC+3.mp4','O','Modelo de Gestión de Voluntariado - TECHO.','Carolina Martinez','33 min','<ul><li>Historia: 15 años en el Perú.</li><li>Definición: voluntario y voluntaria.</li><li>Planificación.</li><li>Diseñar. Ciclo de voluntariado.</li><li>Modelo de gestión de voluntariado.</li><li>Aprendizajes.</li></ul>');
 
 commit;
