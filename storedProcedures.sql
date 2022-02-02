@@ -21,7 +21,7 @@ delimiter ;
 drop procedure if exists spCreateUser;
 
 delimiter //
-
+ 
 create procedure spCreateUser
 (
 	in userEmail nvarchar(100), 
