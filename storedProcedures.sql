@@ -184,3 +184,18 @@ begin
 end //
 
 delimiter ;
+
+
+drop procedure if exists spGetUserNextVideo;
+delimiter //
+create procedure spGetUserNextVideo
+(
+	in userId int
+)
+begin    
+    select  * 
+    from    tbl_user_video
+    where   sIsWatched = false and iIdUser = userId
+    limit   1;
+end //
+delimiter ;
