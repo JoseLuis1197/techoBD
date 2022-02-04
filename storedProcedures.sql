@@ -128,17 +128,35 @@ create procedure spGetUserInfo
 	in userId int
 )
 begin
+
+    declare iVideosWatched int default 0;
+    declare  sVideosWatched char(1);
+
+    select  count(*)
+    into    iVideosWatched
+    from    tbl_user_video
+    where   sIsWatched = true and iIdUser = userId;
+
+    if iVideosWatched = 0 then
+        set sVideosWatched = 'I';
+    elseif iVideosWatched = 5 or iVideosWatched = 8 then
+        set sVideosWatched = 'T';
+    else
+        set sVideosWatched = 'P';
+    end if; 
+
 	select	
 			iId,
 			sUserEmail,
             bIsEnterprise,
             sFullname,
             sDNI,
-            bIsDataTreatment
+            bIsDataTreatment,
+            sVideosWatched
     from 	tbl_user
     where	iId = userId;
-end //
 
+end //
 delimiter ;
 
 drop procedure if exists spListUserVideos;
