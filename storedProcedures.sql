@@ -152,6 +152,7 @@ begin
             sFullname,
             sDNI,
             bIsDataTreatment,
+            iVideosWatched,
             sVideosWatched
     from 	tbl_user
     where	iId = userId;
