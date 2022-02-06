@@ -180,7 +180,7 @@ begin
             v.sConditions as videoConditions,
             v.sSpeaker as videoSpeaker,
             v.sTiming as videoTiming
-    from 	tbl_user_video uv inner join tbl_video v on uv.iId = v.iId
+    from 	tbl_user_video uv inner join tbl_video v on uv.iIdVideo = v.iId
     where 	uv.iIdUser = userId;
 end //
 
