@@ -212,9 +212,22 @@ create procedure spGetUserNextVideo
 	in userId int
 )
 begin    
-    select  * 
-    from    tbl_user_video
-    where   sIsWatched = false and iIdUser = userId
+
+    select	uv.iId as id,
+			uv.iIdUser as userId,
+            uv.iIdVideo as videoId,
+            uv.sIsWatched as videoWatched,
+            v.sName as videoName,
+            v.sAddress as videoAddress,
+            v.sVideoType as videoType,
+            v.sDescription as videoDescription,
+            v.sConditions as videoConditions,
+            v.sSpeaker as videoSpeaker,
+            v.sTiming as videoTiming
+    from    tbl_user_video uv
+    inner join tbl_video v on uv.iIdVideo = v.iId
+    where   uv.sIsWatched = false and uv.iIdUser = userId
     limit   1;
+
 end //
 delimiter ;
