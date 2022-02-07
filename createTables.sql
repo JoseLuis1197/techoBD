@@ -31,6 +31,7 @@ create table tbl_user_video(
     iIdUser int,
     iIdVideo int,
     sIsWatched boolean default false,
+    dDate datetime,
     foreign key (iIdUser) references tbl_user(iId),
     foreign key (iIdVideo) references tbl_video(iId),
     primary key (iId)

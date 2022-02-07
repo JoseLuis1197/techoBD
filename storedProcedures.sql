@@ -131,16 +131,31 @@ begin
 
     declare iVideosWatched int default 0;
     declare  sVideosWatched char(1);
+    declare dVideoFinished datetime;
+    declare booleanIsEnterprise boolean;
 
     select  count(*)
     into    iVideosWatched
     from    tbl_user_video
     where   sIsWatched = true and iIdUser = userId;
 
+    select  bIsEnterprise
+    into    booleanIsEnterprise
+    from    tbl_user
+    where   iId = userId;
+
     if iVideosWatched = 0 then
         set sVideosWatched = 'I';
-    elseif iVideosWatched = 5 or iVideosWatched = 8 then
+    elseif (iVideosWatched = 5 AND booleanIsEnterprise = false)  OR (iVideosWatched = 8 and booleanIsEnterprise = true) then
+        
         set sVideosWatched = 'T';
+
+        select      *
+        into        dVideoFinished
+        from        tbl_user_video
+        where       iIdUser = userId
+        order by    iId desc
+        limit       1;
     else
         set sVideosWatched = 'P';
     end if; 
@@ -153,7 +168,8 @@ begin
             sDNI,
             bIsDataTreatment,
             iVideosWatched,
-            sVideosWatched
+            sVideosWatched,
+            dVideoFinished
     from 	tbl_user
     where	iId = userId;
 
@@ -179,7 +195,7 @@ begin
             v.sDescription as videoDescription,
             v.sConditions as videoConditions,
             v.sSpeaker as videoSpeaker,
-            v.sTiming as videoTiming
+            v.sTiming as videoTiming            
     from 	tbl_user_video uv inner join tbl_video v on uv.iIdVideo = v.iId
     where 	uv.iIdUser = userId;
 end //
@@ -197,7 +213,8 @@ create procedure spUpdateUserVideo
 )
 begin
 	update 	tbl_user_video
-    set 	sIsWatched = true
+    set 	sIsWatched = true,
+            dDate = curDate()
     where 	iIdUser = userId and iIdVideo = videoId;
     commit;
 end //
