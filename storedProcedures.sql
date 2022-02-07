@@ -1,4 +1,5 @@
-drop procedure spValidateUserCredentials;
+drop procedure if exists spValidateUserCredentials;
+
 delimiter //
 create procedure spValidateUserCredentials
 (
@@ -17,10 +18,10 @@ begin
 end //
 delimiter ;
 
-drop procedure spCreateUser;
+drop procedure if exists spCreateUser;
 
 delimiter //
-
+ 
 create procedure spCreateUser
 (
 	in userEmail nvarchar(100), 
@@ -31,8 +32,6 @@ create procedure spCreateUser
     in userDNI nvarchar(10)
 )
 begin
-	declare contador int;
-    declare rowCount int;
     declare videoId int;
     declare userId int;
     
@@ -48,29 +47,24 @@ begin
     from	tbl_user
 	where	sUserEmail = userEmail;
     
-    -- Se agregan los registros para los videos del usuario
-    set contador = 1;
-    set rowCount = 0;
-    
-    select	count(*) as nro
-    into	rowCount
-    from	tbl_video;
-    
-    while contador <= rowCount do
-		select
-				row_number() over (order by iId) row_num,
-				iId
-		into	videoId	
-		from	tbl_video
-        where	row_num = contador;
-        
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,videoId);
+    if isEnterpriseUser = true then
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,1);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,2);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,3);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,4);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,5);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,6);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,7);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,8);
         commit;
-        
-        set contador = contador + 1;
-    
-    end while;   
-
+    else
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,1);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,2);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,3);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,4);
+        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,5);
+        commit;
+    end if;
 end //
 delimiter ;
 
@@ -134,17 +128,52 @@ create procedure spGetUserInfo
 	in userId int
 )
 begin
+
+    declare iVideosWatched int default 0;
+    declare  sVideosWatched char(1);
+    declare dVideoFinished datetime;
+    declare booleanIsEnterprise boolean;
+
+    select  count(*)
+    into    iVideosWatched
+    from    tbl_user_video
+    where   sIsWatched = true and iIdUser = userId;
+
+    select  bIsEnterprise
+    into    booleanIsEnterprise
+    from    tbl_user
+    where   iId = userId;
+
+    if iVideosWatched = 0 then
+        set sVideosWatched = 'I';
+    elseif (iVideosWatched = 5 AND booleanIsEnterprise = false)  OR (iVideosWatched = 8 and booleanIsEnterprise = true) then
+        
+        set sVideosWatched = 'T';
+
+        select      *
+        into        dVideoFinished
+        from        tbl_user_video
+        where       iIdUser = userId
+        order by    iId desc
+        limit       1;
+    else
+        set sVideosWatched = 'P';
+    end if; 
+
 	select	
 			iId,
 			sUserEmail,
             bIsEnterprise,
             sFullname,
             sDNI,
-            bIsDataTreatment
+            bIsDataTreatment,
+            iVideosWatched,
+            sVideosWatched,
+            dVideoFinished
     from 	tbl_user
     where	iId = userId;
-end //
 
+end //
 delimiter ;
 
 drop procedure if exists spListUserVideos;
@@ -162,9 +191,13 @@ begin
             uv.sIsWatched as videoWatched,
             v.sName as videoName,
             v.sAddress as videoAddress,
-            v.sVideoType as videoType
-    from 	tbl_user_video uv inner join tbl_video v on uv.iId = v.iId
-    where 	uv.iId = userId;
+            v.sVideoType as videoType,
+            v.sDescription as videoDescription,
+            v.sConditions as videoConditions,
+            v.sSpeaker as videoSpeaker,
+            v.sTiming as videoTiming            
+    from 	tbl_user_video uv inner join tbl_video v on uv.iIdVideo = v.iId
+    where 	uv.iIdUser = userId;
 end //
 
 delimiter ;
@@ -180,9 +213,38 @@ create procedure spUpdateUserVideo
 )
 begin
 	update 	tbl_user_video
-    set 	sIsWatched = true
+    set 	sIsWatched = true,
+            dDate = curDate()
     where 	iIdUser = userId and iIdVideo = videoId;
     commit;
 end //
 
+delimiter ;
+
+
+drop procedure if exists spGetUserNextVideo;
+delimiter //
+create procedure spGetUserNextVideo
+(
+	in userId int
+)
+begin    
+
+    select	uv.iId as id,
+			uv.iIdUser as userId,
+            uv.iIdVideo as videoId,
+            uv.sIsWatched as videoWatched,
+            v.sName as videoName,
+            v.sAddress as videoAddress,
+            v.sVideoType as videoType,
+            v.sDescription as videoDescription,
+            v.sConditions as videoConditions,
+            v.sSpeaker as videoSpeaker,
+            v.sTiming as videoTiming
+    from    tbl_user_video uv
+    inner join tbl_video v on uv.iIdVideo = v.iId
+    where   uv.sIsWatched = false and uv.iIdUser = userId
+    limit   1;
+
+end //
 delimiter ;
