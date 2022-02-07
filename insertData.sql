@@ -20,3 +20,15 @@ INSERT INTO `tbl_video` (`iId`, `sName`, `sDescription`, `sConditions`, `sSpeake
 (8, 'Presentación 3', 'Modelo de Gestión de Voluntariado - TECHO.', '<ul class=\"list-group\"><li class=\"list-group-item\"><i class=\"fas fa-check px-2\"></i>Historia: 15 años en el Perú.</li><li class=\"list-group-item\"><i class=\"fas fa-check px-2\"></i>Definición: voluntario y voluntaria.</li><li class=\"list-group-item\"><i class=\"fas fa-check px-2\"></i>Planificación.</li><li class=\"list-group-item\"><i class=\"fas fa-check px-2\"></i>Diseñar. Ciclo de voluntariado.</li><li class=\"list-group-item\"><i class=\"fas fa-check px-2\"></i>Modelo de gestión de voluntariado.</li><li class=\"list-group-item\"><i class=\"fas fa-check px-2\"></i>Aprendizajes.</li></ul class=\"list-group\">', 'Carolina Martinez', '33 min', 'https://bucket-techo-dev.s3.us-east-2.amazonaws.com/Video+PRESNTAC+3.mp4', 'O');
 
 commit;
+
+--LinkedIn links for speakers
+
+--Nancy Arellano - https://www.linkedin.com/in/nancyarellanos/?originalSubdomain=pe
+--Ysabel Pastor - https://www.linkedin.com/in/ysabel-pastor-zapata-b2b642171/
+--Cristabel Cartaya - https://www.linkedin.com/in/cristabelcartaya/
+--Diego Lizarzaburu - https://www.linkedin.com/in/diego-lizarzaburu-castagnino-80860a76/
+--Nurys Morin - https://www.linkedin.com/in/nurys-morin-ab8a80162/
+--Ivonne Harvey - https://www.linkedin.com/in/ivonneharvey/
+--Teri de Sario Acasuzo - https://www.linkedin.com/in/teri-de-sario-a-7352ba44/
+--Carolina Martínez - https://www.linkedin.com/in/carolinamartinezaguirre/
+--Vanessa Delgado - https://www.linkedin.com/in/vanedelgado/
