@@ -21,7 +21,7 @@ delimiter ;
 drop procedure if exists spCreateUser;
 
 delimiter //
- 
+
 create procedure spCreateUser
 (
 	in userEmail nvarchar(100), 
@@ -39,32 +39,39 @@ begin
         insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName,bisDataTreatment,sDNI) 
         values (userEmail,isEnterpriseUser,userPassword,userFullName,userIsDataTreatment,userDNI);     
         commit;
+
+        -- Se obtiene el id del usuario creado    
+        select	iId 
+        into 	userId
+        from	tbl_user
+        where	sUserEmail = userEmail;
+        
+        if isEnterpriseUser = true then
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,1);
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,2);
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,3);
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,4);
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,5);
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,6);
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,7);
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,8);
+            commit;
+        else
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,1);
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,2);
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,3);
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,4);
+            insert into tbl_user_video (iIdUser,iIdVideo) values (userId,5);
+            commit;
+        end if;
+
+        select "OK";
+    else
+        select "ERROR";
     End if ;  
     
-    -- Se obtiene el id del usuario creado    
-    select	iId 
-    into 	userId
-    from	tbl_user
-	where	sUserEmail = userEmail;
+
     
-    if isEnterpriseUser = true then
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,1);
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,2);
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,3);
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,4);
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,5);
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,6);
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,7);
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,8);
-        commit;
-    else
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,1);
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,2);
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,3);
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,4);
-        insert into tbl_user_video (iIdUser,iIdVideo) values (userId,5);
-        commit;
-    end if;
 end //
 delimiter ;
 
@@ -131,7 +138,7 @@ begin
 
     declare iVideosWatched int default 0;
     declare  sVideosWatched char(1);
-    declare dVideoFinished datetime;
+    declare dVideoFinished date;
     declare booleanIsEnterprise boolean;
 
     select  count(*)
@@ -150,7 +157,7 @@ begin
         
         set sVideosWatched = 'T';
 
-        select      *
+        select      date_format(dDate, '%Y-%m-%d')
         into        dVideoFinished
         from        tbl_user_video
         where       iIdUser = userId
