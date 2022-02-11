@@ -21,7 +21,7 @@ delimiter ;
 drop procedure if exists spCreateUser;
 
 delimiter //
- 
+
 create procedure spCreateUser
 (
 	in userEmail nvarchar(100), 
@@ -64,8 +64,13 @@ begin
             insert into tbl_user_video (iIdUser,iIdVideo) values (userId,5);
             commit;
         end if;
+
+        select "OK";
+    else
+        select "ERROR";
     End if ;  
     
+
     
 end //
 delimiter ;
