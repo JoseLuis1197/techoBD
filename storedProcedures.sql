@@ -35,7 +35,7 @@ begin
     declare videoId int;
     declare userId int;
     
-    if  NOT EXISTS (SELECT 1 FROM tbl_user WHERE sUserEmail = userEmail) THEN
+    if  NOT EXISTS (SELECT 1 FROM tbl_user WHERE sUserEmail = userEmail or sDNI = userDNI) THEN
         insert into tbl_user (sUserEmail,bIsEnterprise,sPassword,sFullName,bisDataTreatment,sDNI) 
         values (userEmail,isEnterpriseUser,userPassword,userFullName,userIsDataTreatment,userDNI);     
         commit;
@@ -64,12 +64,12 @@ begin
             insert into tbl_user_video (iIdUser,iIdVideo) values (userId,5);
             commit;
         end if;
-
-        select "OK";
+        select "OK" as RESULTADO;
+    elseif EXISTS (SELECT 1 FROM tbl_user WHERE sDNI = userDNI) THEN
+        select "ERROR DNI" as RESULTADO;
     else
-        select "ERROR";
-    End if ;  
-    
+        select "ERROR EMAIL" as RESULTADO;
+    End if ;    
 
     
 end //
