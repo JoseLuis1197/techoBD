@@ -14,6 +14,9 @@ CREATE TABLE tbl_user (
     PRIMARY KEY (iId)
 );
 
+
+ALTER TABLE tbl_user ADD sToken varchar(8) after sFullName;
+
 create table tbl_video(
 	iId int not null auto_increment,
     sName nvarchar(50) not null,

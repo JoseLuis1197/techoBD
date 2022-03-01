@@ -228,7 +228,6 @@ end //
 
 delimiter ;
 
-
 drop procedure if exists spGetUserNextVideo;
 delimiter //
 create procedure spGetUserNextVideo
@@ -252,6 +251,57 @@ begin
     inner join tbl_video v on uv.iIdVideo = v.iId
     where   uv.sIsWatched = false and uv.iIdUser = userId
     limit   1;
+
+end //
+delimiter ;
+
+drop procedure if exists spValidateUser;
+delimiter //
+create procedure spValidateUser
+(
+	in email varchar(100),
+    in token varchar(100)
+)
+begin    
+
+    if exists (select 1 from tbl_user where sUserEmail = email) then
+
+        update  tbl_user
+        set     sToken = token
+        where   sUserEmail = email;
+        commit;
+        
+        select "OK" as resultado;
+    else
+        select "Error en actualizar token" as resultado;
+    end if;
+
+end //
+delimiter ;
+
+drop procedure if exists spUpdatePassword;
+delimiter //
+create procedure spUpdatePassword
+(
+	in userId varchar(100),
+    in token char(8),
+    in newPassord varchar(100)
+)
+begin    
+
+    if exists (select 1 from tbl_user where sToken = token and iId = userId)    
+
+        update  tbl_user
+        set     sPassword = newPassword
+        where   iId = userId;
+        commit;
+
+        select "OK" as resultado;
+
+    else
+        select "Error" as resultado;
+
+    end if;
 
 end //
 delimiter ;

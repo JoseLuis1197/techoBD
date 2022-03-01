@@ -21,14 +21,14 @@ INSERT INTO `tbl_video` (`iId`, `sName`, `sDescription`, `sConditions`, `sSpeake
 
 commit;
 
---LinkedIn links for speakers
+-- LinkedIn links for speakers
 
---Nancy Arellano - https://www.linkedin.com/in/nancyarellanos/?originalSubdomain=pe
---Ysabel Pastor - https://www.linkedin.com/in/ysabel-pastor-zapata-b2b642171/
---Cristabel Cartaya - https://www.linkedin.com/in/cristabelcartaya/
---Diego Lizarzaburu - https://www.linkedin.com/in/diego-lizarzaburu-castagnino-80860a76/
---Nurys Morin - https://www.linkedin.com/in/nurys-morin-ab8a80162/
---Ivonne Harvey - https://www.linkedin.com/in/ivonneharvey/
---Teri de Sario Acasuzo - https://www.linkedin.com/in/teri-de-sario-a-7352ba44/
---Carolina Martínez - https://www.linkedin.com/in/carolinamartinezaguirre/
---Vanessa Delgado - https://www.linkedin.com/in/vanedelgado/
+-- Nancy Arellano - https://www.linkedin.com/in/nancyarellanos/?originalSubdomain=pe
+-- Ysabel Pastor - https://www.linkedin.com/in/ysabel-pastor-zapata-b2b642171/
+-- Cristabel Cartaya - https://www.linkedin.com/in/cristabelcartaya/
+-- Diego Lizarzaburu - https://www.linkedin.com/in/diego-lizarzaburu-castagnino-80860a76/
+-- Nurys Morin - https://www.linkedin.com/in/nurys-morin-ab8a80162/
+-- Ivonne Harvey - https://www.linkedin.com/in/ivonneharvey/
+-- Teri de Sario Acasuzo - https://www.linkedin.com/in/teri-de-sario-a-7352ba44/
+-- Carolina Martínez - https://www.linkedin.com/in/carolinamartinezaguirre/
+-- Vanessa Delgado - https://www.linkedin.com/in/vanedelgado/
