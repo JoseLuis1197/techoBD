@@ -255,7 +255,7 @@ begin
 end //
 delimiter ;
 
-DROP PROCEDURE `spValidateUser`;
+drop procedure if exists `spValidateUser`;
 delimiter //
 CREATE PROCEDURE `spValidateUser`(
     IN `email` VARCHAR(100), 
