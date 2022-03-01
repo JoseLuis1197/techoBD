@@ -255,13 +255,11 @@ begin
 end //
 delimiter ;
 
-drop procedure if exists spValidateUser;
+DROP PROCEDURE `spValidateUser`;
 delimiter //
-create procedure spValidateUser
-(
-	in email varchar(100),
-    in token varchar(100)
-)
+CREATE PROCEDURE `spValidateUser`(
+    IN `email` VARCHAR(100), 
+    IN `token` VARCHAR(100)) NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER 
 begin    
 
     if exists (select 1 from tbl_user where sUserEmail = email) then
@@ -270,36 +268,35 @@ begin
         set     sToken = token
         where   sUserEmail = email;
         commit;
-        
-        select "OK" as resultado;
+
+        select "OK" as RESULTADO;
     else
-        select "Error en actualizar token" as resultado;
+        select "Error" as RESULTADO;
     end if;
 
-end //
+end//
 delimiter ;
 
 drop procedure if exists spUpdatePassword;
 delimiter //
 create procedure spUpdatePassword
 (
-	in userId varchar(100),
-    in token char(8),
+	in token char(8),
     in newPassord varchar(100)
 )
 begin    
 
-    if exists (select 1 from tbl_user where sToken = token and iId = userId)    
+    if exists (select 1 from tbl_user where sToken = token) then
 
         update  tbl_user
         set     sPassword = newPassword
-        where   iId = userId;
+        where   sToken = token;
         commit;
 
-        select "OK" as resultado;
+        select "OK" as RESULTADO;
 
     else
-        select "Error" as resultado;
+        select "Error" as RESULTADO;
 
     end if;
 
