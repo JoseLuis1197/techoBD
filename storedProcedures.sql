@@ -282,7 +282,7 @@ delimiter //
 create procedure spUpdatePassword
 (
 	in token char(8),
-    in newPassord varchar(100)
+    in newPassword varchar(100)
 )
 begin    
 
